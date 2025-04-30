@@ -39,7 +39,7 @@ async function loadProducts() {
             // Adjust if backend stores only filename
             const imageUrl = product.imageUrl && product.imageUrl.startsWith('http') 
                              ? product.imageUrl 
-                             : (product.imageUrl ? `http://localhost:5000${product.imageUrl}` : 'images/placeholder.png'); // Adjust base URL if needed
+                             : (product.imageUrl ? `https://thing-s-for-rent1-1.onrender.com${product.imageUrl}` : 'images/placeholder.png'); // Adjust base URL if needed
             
             const productCard = `
                 <div class="product-card">
@@ -104,7 +104,7 @@ async function loadProductDetails() {
         if (imageElement) {
             const imageUrl = product.imageUrl && product.imageUrl.startsWith('http') 
                              ? product.imageUrl 
-                             : (product.imageUrl ? `http://localhost:5000${product.imageUrl}` : 'images/placeholder.png'); // Adjust base URL if needed
+                             : (product.imageUrl ? `https://thing-s-for-rent1-1.onrender.com${product.imageUrl}` : 'images/placeholder.png'); // Adjust base URL if needed
             imageElement.src = imageUrl;
             imageElement.alt = product.name || 'Product Image';
             imageElement.onerror = () => { imageElement.src = 'images/placeholder.png'; };
@@ -297,7 +297,7 @@ async function loadUserProducts() {
             const productId = product._id;
             const imageUrl = product.imageUrl && product.imageUrl.startsWith('http') 
                              ? product.imageUrl 
-                             : (product.imageUrl ? `http://localhost:5000${product.imageUrl}` : 'images/placeholder.png'); // Adjust base URL if needed
+                             : (product.imageUrl ? `https://thing-s-for-rent1-1.onrender.com${product.imageUrl}` : 'images/placeholder.png'); // Adjust base URL if needed
 
             const li = document.createElement('li');
             li.className = 'user-product-item';
@@ -363,6 +363,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Export functions if they need to be called from other modules (e.g., profile.js)
-export { loadUserProducts, handleAddProduct }; // Export necessary functions
-
+// Export functions if they need to be
