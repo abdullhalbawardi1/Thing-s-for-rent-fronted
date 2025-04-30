@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="register_page_title">إنشاء حساب - أشياء للإيجار</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header id="header-placeholder">
+        <!-- Header content will be loaded by JS -->
+    </header>
+
+    <main class="auth-page">
+        <h1 data-translate="register_heading">إنشاء حساب جديد</h1>
+        <form id="register-form">
+            <div id="auth-feedback" class="feedback-message" style="color: red; margin-bottom: 10px; display: none;"></div> <!-- Add this -->
+            <div class="form-group">
+                <label for="name" data-translate="name_label">الاسم</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email" data-translate="email_label">البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password" data-translate="password_label">كلمة المرور</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" data-translate="register_button">إنشاء حساب</button>
+            <p class="auth-switch" data-translate="already_have_account">لديك حساب بالفعل؟ <a href="login.html" data-translate="login_link">تسجيل الدخول</a></p>
+        </form>
+    </main>
+
+    <footer id="footer-placeholder">
+        <!-- Footer content will be loaded by JS -->
+    </footer>
+
+    <!-- Project Scripts -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/language-switcher.js"></script>
+    <script src="js/components.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

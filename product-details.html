@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="product_details_page_title">تفاصيل المنتج - أشياء للإيجار</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header id="header-placeholder">
+        <!-- Header content will be loaded by JS -->
+    </header>
+
+    <main id="product-details-container" class="container">
+        <h1 data-translate="product_details_heading">تفاصيل المنتج</h1>
+        <div class="product-details-layout">
+            <div class="product-image-section">
+                <img id="product-image" src="" alt="Product Image" />
+            </div>
+            <div class="product-info-section">
+                <h2 id="product-name"></h2>
+                <p id="product-description"></p>
+                <p id="product-price" class="price"></p>
+                <p id="product-owner" data-translate="owned_by">المالك: <span></span></p>
+                
+                <div class="booking-section">
+                    <h3 data-translate="book_now_heading">احجز الآن</h3>
+                    <form id="booking-form">
+                        <div class="form-group">
+                            <label for="start-date" data-translate="start_date_label">تاريخ البدء:</label>
+                            <input type="date" id="start-date" name="start-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end-date" data-translate="end_date_label">تاريخ الانتهاء:</label>
+                            <input type="date" id="end-date" name="end-date" required>
+                        </div>
+                        <button type="submit" data-translate="book_button">تأكيد الحجز</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer-placeholder">
+        <!-- Footer content will be loaded by JS -->
+    </footer>
+
+    <!-- Project Scripts -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/language-switcher.js"></script>
+    <script src="js/components.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/products.js"></script>
+    <script type="module" src="js/booking.js"></script>
+</body>
+</html>

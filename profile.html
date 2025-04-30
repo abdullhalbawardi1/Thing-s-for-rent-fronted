@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="profile_page_title">الملف الشخصي - أشياء للإيجار</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header id="header-placeholder">
+        <!-- Header content will be loaded by JS -->
+    </header>
+
+    <main id="profile-container" class="container">
+        <h1 data-translate="profile_heading">الملف الشخصي</h1>
+        
+        <div class="profile-section">
+            <h2 data-translate="profile_details_heading">تفاصيل الحساب</h2>
+            <div id="profile-details">
+                <!-- User details (name, email) will be loaded here -->
+                <p><strong data-translate="profile_name_label">الاسم:</strong> <span id="profile-name"></span></p>
+                <p><strong data-translate="profile_email_label">البريد الإلكتروني:</strong> <span id="profile-email"></span></p>
+                <!-- Add edit profile button/link later -->
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <h2 data-translate="profile_my_items_heading">المنتجات المعروضة</h2>
+            <div id="profile-items-list">
+                <!-- Items listed by the user will be loaded here -->
+            </div>
+            <!-- Add New Item Form -->
+            <div class="add-item-section profile-section" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+                <h3 data-translate="add_new_item_heading">إضافة منتج جديد</h3>
+                <form id="add-product-form">
+                    <div class="form-group">
+                        <label for="product-name-input" data-translate="product_name_label">اسم المنتج:</label>
+                        <input type="text" id="product-name-input" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-description-input" data-translate="product_description_label">الوصف:</label>
+                        <textarea id="product-description-input" name="description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price-input" data-translate="product_price_label">السعر (لكل يوم):</label>
+                        <input type="number" id="product-price-input" name="price" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image-input" data-translate="product_image_label">صورة المنتج:</label>
+                        <input type="file" id="product-image-input" name="image" accept="image/*" required>
+                    </div>
+                    <button type="submit" data-translate="add_item_button">إضافة المنتج</button>
+                </form>
+            </div>
+            <!-- End Add New Item Form -->
+        </div>
+
+        <div class="profile-section">
+            <h2 data-translate="profile_my_bookings_heading">حجوزاتي</h2>
+            <div id="profile-bookings-list">
+                <!-- Bookings made by the user will be loaded here -->
+            </div>
+        </div>
+
+    </main>
+
+    <footer id="footer-placeholder">
+        <!-- Footer content will be loaded by JS -->
+    </footer>
+
+    <!-- Project Scripts -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/language-switcher.js"></script>
+    <script src="js/components.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/products.js"></script>
+    <script type="module" src="js/booking.js"></script>
+    <script type="module" src="js/profile.js"></script> <!-- Add profile script -->
+</body>
+</html>
