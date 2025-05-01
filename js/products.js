@@ -329,15 +329,4 @@ async function loadUserProducts() {
 
 
 // Functions are now globally accessible
-// Ensure this script is loaded before main.js addProductForm.description.value;
-            const price = addProductForm.price.value;
-            const imageFile = addProductForm.image.files[0];
-
-            if (imageFile) {
-                handleAddProduct(name, description, price, imageFile);
-            } else {
-                alert("الرجاء اختيار صورة للمنتج.");
-            }
-        });
-    }
-});
+// Ensure this script is loaded before main.js
