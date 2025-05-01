@@ -128,10 +128,8 @@ function updateNavLinks(isLoggedIn) {
         if (logoutLinkContainer) logoutLinkContainer.style.display = 'block';
         if (profileLinkContainer) profileLinkContainer.style.display = 'block';
     } else {
-        // Assuming login/register are combined or handled differently now
-        // Let's hide login/profile and show nothing specific for logout state in nav
-        // Or maybe show a combined "Login/Register" link if needed
-        if (loginLinkContainer) loginLinkContainer.style.display = 'none'; // Or point to login page
+        // Show login/register link, hide profile/logout
+        if (loginLinkContainer) loginLinkContainer.style.display = 'block'; // Show login link
         if (logoutLinkContainer) logoutLinkContainer.style.display = 'none';
         if (profileLinkContainer) profileLinkContainer.style.display = 'none';
     }
