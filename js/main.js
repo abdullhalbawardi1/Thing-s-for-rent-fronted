@@ -15,16 +15,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         // 2. Load Header and Footer (assuming global functions from components.js)
+        // Make sure header/footer are loaded *before* adding listeners or checking auth state
         if (typeof loadHeader === "function" && typeof loadFooter === "function") {
-            loadHeader();
-            loadFooter();
+            await loadHeader(); // Wait for header to load
+            await loadFooter(); // Wait for footer to load
             console.log("Header and Footer loaded.");
         } else {
             console.error("loadHeader or loadFooter function not found. Ensure components.js is loaded before main.js.");
             return; // Stop execution if component loading fails
         }
 
-        // 3. Add Event Listeners (after header/footer are in the DOM)
+        // 3. Check Authentication State and Update UI (assuming global checkAuthState from auth.js)
+        // This needs to run *after* the header is loaded so nav links exist
+        if (typeof checkAuthState === "function") {
+            checkAuthState(); 
+            console.log("Auth state checked.");
+        } else {
+            console.error("checkAuthState function not found. Ensure auth.js is loaded before main.js.");
+        }
+
+        // 4. Add Event Listeners (after header/footer are in the DOM)
         // Logout button listener (assuming global handleLogout from auth.js)
         const logoutButton = document.getElementById("nav-logout-button");
         if (logoutButton && typeof handleLogout === "function") {
@@ -34,7 +44,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
             console.log("Logout button listener added.");
         } else if (!logoutButton) {
-            console.warn("Logout button not found after header load.");
+            // This might happen if checkAuthState hasn't run yet or user isn't logged in
+            console.warn("Logout button not found (might be expected if logged out).");
         } else {
             console.error("handleLogout function not found. Ensure auth.js is loaded before main.js.");
         }
@@ -50,14 +61,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.warn("Language switcher button not found after header load.");
         } else {
              console.error("toggleLanguage function not found. Ensure components.js is loaded before main.js.");
-        }
-
-        // 4. Check Authentication State and Update UI (assuming global checkAuthState from auth.js)
-        if (typeof checkAuthState === "function") {
-            checkAuthState(); 
-            console.log("Auth state checked.");
-        } else {
-            console.error("checkAuthState function not found. Ensure auth.js is loaded before main.js.");
         }
 
         // 5. Load Products (if on the index page, assuming global loadProducts from products.js)
@@ -111,8 +114,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         // We might need to call translatePage within loadHeader, loadFooter, loadProducts etc.
         // Or call it here once, assuming all placeholders are in the DOM initially.
         if (typeof translatePage === "function" && typeof currentLanguage !== "undefined") {
-            translatePage(currentLanguage);
-            console.log("Initial page translation applied.");
+            // Wait a brief moment to ensure dynamic content is likely rendered
+            setTimeout(() => {
+                translatePage(currentLanguage);
+                console.log("Initial page translation applied.");
+            }, 100); // Adjust delay if needed
         } else {
              console.error("translatePage function or currentLanguage variable not found.");
         }
