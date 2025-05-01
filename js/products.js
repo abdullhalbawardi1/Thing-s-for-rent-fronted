@@ -10,55 +10,29 @@ function getAuthToken() {
 }
 
 // Function to load products and display them on the homepage
+// *** SIMPLIFIED FOR DEBUGGING ***
 async function loadProducts() {
     const productListContainer = document.getElementById("product-list-container");
-    if (!productListContainer) return;
+    if (!productListContainer) {
+        console.error("Product list container not found!");
+        return;
+    }
 
-    console.log("Loading products from backend API...");
-    productListContainer.innerHTML = `<p data-translate="loading_products">جاري تحميل المنتجات...</p>`;
-    // translatePage(currentLanguage); // Assuming translatePage is available globally or imported
-
+    console.log("DEBUG: Attempting to display static 'No products found' message.");
     try {
-        const response = await fetch(`${API_BASE_URL}/products`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        // **CORRECTION:** Access the 'products' array from the response object
-        const data = await response.json(); 
-        const products = data.products; // Get the array from the 'products' property
-
-        productListContainer.innerHTML = ''; // Clear loading message
-
-        // Check if the products array exists and is empty
-        if (!products || products.length === 0) { 
-            productListContainer.innerHTML = '<p data-translate="no_products_found">لم يتم العثور على منتجات.</p>';
+        // Directly set the HTML to the 'No products found' message
+        productListContainer.innerHTML = '<p data-translate="no_products_found">لم يتم العثور على منتجات.</p>';
+        console.log("DEBUG: 'No products found' message should be displayed.");
+        
+        // Optionally call translatePage if it's available and needed for the static message
+        if (typeof translatePage === 'function' && typeof currentLanguage !== 'undefined') {
             // translatePage(currentLanguage);
-            return;
         }
-
-        products.forEach((product) => {
-            const productId = product._id; // MongoDB uses _id
-            const imageUrl = product.imageUrl && product.imageUrl.startsWith('http') 
-                             ? product.imageUrl 
-                             : (product.imageUrl ? `https://thing-s-for-rent1-1.onrender.com${product.imageUrl}` : 'images/placeholder.png'); // Adjust base URL if needed
-            
-            const productCard = `
-                <div class="product-card">
-                    <img src="${imageUrl}" alt="${product.name || 'Product Image'}" onerror="this.onerror=null;this.src='images/placeholder.png';">
-                    <div class="product-card-content">
-                        <h3>${product.name || 'اسم غير متوفر'}</h3>
-                        <p class="price">${product.price ? `${product.price} / <span data-translate='day'>يوم</span>` : '<span data-translate="price_unavailable">السعر غير متوفر</span>'}</p>
-                        <a href="product-details.html?id=${productId}" class="button" data-translate="view_details_button">عرض التفاصيل</a>
-                    </div>
-                </div>
-            `;
-            productListContainer.innerHTML += productCard;
-        });
-        // translatePage(currentLanguage); // Apply translation to newly added elements
     } catch (error) {
-        console.error("Error loading products: ", error);
-        productListContainer.innerHTML = '<p data-translate="error_loading_products">حدث خطأ أثناء تحميل المنتجات.</p>';
-        // translatePage(currentLanguage);
+        // This catch block might not be strictly necessary for the simplified version,
+        // but good practice to keep for potential DOM manipulation errors.
+        console.error("Error setting static message in product container: ", error);
+        productListContainer.innerHTML = '<p data-translate="error_loading_products">حدث خطأ أثناء محاولة عرض الرسالة.</p>';
     }
 }
 
