@@ -6,7 +6,7 @@
     <title data-translate="site_title">أشياء للإيجار</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <!-- Add link to Firebase SDKs later -->
+    <!-- Add link to Firebase SDKs later if needed directly in HTML -->
 </head>
 <body>
     <header id="header-placeholder">
@@ -26,12 +26,17 @@
     </footer>
 
     <!-- Project Scripts -->
-    <!-- Load Firebase config first as other scripts depend on it -->
-    <script type="module" src="js/firebase-config.js"></script> 
+    <!-- Load Firebase config first as other modules might depend on Firebase initialization -->
+    <script type="module" src="js/firebase-config.js"></script>
+    
+    <!-- Load language switcher - assuming it sets up global functions or needs to run early -->
     <script src="js/language-switcher.js"></script>
-    <script src="js/components.js"></script>
-    <script type="module" src="js/main.js"></script> <!-- Make main module to import other modules -->
-    <script type="module" src="js/products.js"></script>
-    <!-- Add script tags for other JS files later -->
+
+    <!-- Load the main script as a module, which will import and orchestrate others -->
+    <script type="module" src="js/main.js"></script>
+
+    <!-- Removed direct script tags for components.js and products.js -->
+    <!-- Removed duplicate main.js module load -->
+    <!-- Assuming auth.js is loaded as a module via import in other scripts -->
+
 </body>
-</html>
