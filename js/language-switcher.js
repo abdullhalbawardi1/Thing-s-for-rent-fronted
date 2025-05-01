@@ -65,6 +65,5 @@ async function initializeLanguage() {
     await setLanguage(savedLang);
 }
 
-// Export functions and variables needed by other modules
-export { currentLanguage, initializeLanguage, setLanguage, translatePage };
-
+// Functions and variables are now globally accessible
+// Ensure this script is loaded before scripts that use these functions (like main.js and components.js)
