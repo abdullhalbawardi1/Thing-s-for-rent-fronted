@@ -328,32 +328,8 @@ async function loadUserProducts() {
 }
 
 
-// --- Event Listeners --- 
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Load products on the homepage
-    if (document.getElementById('product-list-container')) {
-        loadProducts();
-    }
-
-    // Load product details on the product details page
-    if (document.getElementById('product-details-container')) {
-        loadProductDetails();
-    }
-    
-    // Load user products on the profile page (assuming profile.js might call this)
-    // If profile.js doesn't exist or call it, uncomment this:
-    // if (document.getElementById('profile-items-list')) {
-    //     loadUserProducts();
-    // }
-
-    // Listener for an 'Add Product' form
-    const addProductForm = document.getElementById('add-product-form');
-    if (addProductForm) {
-        addProductForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = addProductForm.name.value;
-            const description = addProductForm.description.value;
+// Functions are now globally accessible
+// Ensure this script is loaded before main.js addProductForm.description.value;
             const price = addProductForm.price.value;
             const imageFile = addProductForm.image.files[0];
 
