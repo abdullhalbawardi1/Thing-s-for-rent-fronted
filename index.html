@@ -25,18 +25,18 @@
         <!-- Footer content will be loaded by JS -->
     </footer>
 
-    <!-- Project Scripts -->
-    <!-- Load Firebase config first as other modules might depend on Firebase initialization -->
-    <script type="module" src="js/firebase-config.js"></script>
-    
-    <!-- Load language switcher - assuming it sets up global functions or needs to run early -->
+    <!-- Project Scripts - Traditional Loading Order -->
+    <!-- Load Firebase config first (assuming it might be needed early, keep as module if necessary) -->
+    <script type="module" src="js/firebase-config.js"></script> 
+
+    <!-- Load scripts providing global functions -->
     <script src="js/language-switcher.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/products.js"></script> <!-- Renamed from products_corrected.js -->
 
-    <!-- Load the main script as a module, which will import and orchestrate others -->
-    <script type="module" src="js/main.js"></script>
-
-    <!-- Removed direct script tags for components.js and products.js -->
-    <!-- Removed duplicate main.js module load -->
-    <!-- Assuming auth.js is loaded as a module via import in other scripts -->
+    <!-- Load main script last to orchestrate -->
+    <script src="js/main.js"></script> 
 
 </body>
+</html>
