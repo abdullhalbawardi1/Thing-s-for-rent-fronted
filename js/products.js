@@ -1,5 +1,6 @@
 // js/products.js
 // Updated to use custom backend API
+// Corrected to handle backend response format { products: [...] }
 
 const API_BASE_URL = 'https://thing-s-for-rent1-1.onrender.com/api';
 
@@ -22,11 +23,14 @@ async function loadProducts() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const products = await response.json();
+        // **CORRECTION:** Access the 'products' array from the response object
+        const data = await response.json(); 
+        const products = data.products; // Get the array from the 'products' property
 
         productListContainer.innerHTML = ''; // Clear loading message
 
-        if (!products || products.length === 0) {
+        // Check if the products array exists and is empty
+        if (!products || products.length === 0) { 
             productListContainer.innerHTML = '<p data-translate="no_products_found">لم يتم العثور على منتجات.</p>';
             // translatePage(currentLanguage);
             return;
@@ -34,9 +38,6 @@ async function loadProducts() {
 
         products.forEach((product) => {
             const productId = product._id; // MongoDB uses _id
-            // Use placeholder if imageUrl is missing or invalid
-            // Assuming backend provides full URL or path relative to backend host
-            // Adjust if backend stores only filename
             const imageUrl = product.imageUrl && product.imageUrl.startsWith('http') 
                              ? product.imageUrl 
                              : (product.imageUrl ? `https://thing-s-for-rent1-1.onrender.com${product.imageUrl}` : 'images/placeholder.png'); // Adjust base URL if needed
@@ -280,8 +281,10 @@ async function loadUserProducts() {
             // translatePage(currentLanguage);
             return;
         }
+        // **CORRECTION:** Access the 'products' array from the response object (assuming /my returns direct array, adjust if needed)
+        const products = await response.json(); 
+        // If /my returns { products: [...] }, use: const data = await response.json(); const products = data.products;
 
-        const products = await response.json();
         userItemsListContainer.innerHTML = ''; // Clear loading indicator
 
         if (!products || products.length === 0) {
@@ -362,5 +365,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-// Export functions if they need to be
