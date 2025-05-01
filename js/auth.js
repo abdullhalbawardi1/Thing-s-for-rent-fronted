@@ -225,6 +225,5 @@ document.addEventListener('DOMContentLoaded', () => {
     checkAuthState();
 });
 
-// Export functions if needed elsewhere (though not strictly necessary if only used via event listeners)
-// export { handleLogin, handleRegistration, handleLogout, checkAuthState };
-
+// Export functions needed by other modules
+export { handleLogin, handleRegistration, handleLogout, checkAuthState, updateNavLinks };
