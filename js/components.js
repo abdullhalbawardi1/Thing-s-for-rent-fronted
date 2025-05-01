@@ -58,5 +58,5 @@ function toggleLanguage() {
     }
 }
 
-// Export functions to be used by main.js
-export { loadHeader, loadFooter, toggleLanguage };
+// Functions are now globally accessible
+// Ensure this script is loaded after language-switcher.js and auth.js, but before main.js
