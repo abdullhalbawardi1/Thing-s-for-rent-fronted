@@ -1,9 +1,14 @@
 // js/components.js
-import { handleLogout, checkAuthState } from './auth.js'; // Import necessary auth functions
+// Note: Imports and DOMContentLoaded listener removed, functions are now exported
+// Assumes auth functions (handleLogout, checkAuthState) will be called from main.js or auth.js
+// Assumes language functions (setLanguage, currentLanguage, initializeLanguage, translatePage) are globally available from language-switcher.js
 
 function loadHeader() {
     const headerPlaceholder = document.getElementById("header-placeholder");
-    if (!headerPlaceholder) return;
+    if (!headerPlaceholder) {
+        console.error("Header placeholder not found!");
+        return;
+    }
 
     // Header structure with containers for dynamic links
     headerPlaceholder.innerHTML = `
@@ -19,27 +24,21 @@ function loadHeader() {
                     <li id="nav-logout-container" style="display: none;"><a href="#" id="nav-logout-button" data-translate="nav_logout">تسجيل الخروج</a></li>
                 </ul>
             </nav>
-            <button id="language-switcher" onclick="toggleLanguage()" class="language-button">English</button>
+            <!-- Removed onclick attribute, will be added in main.js -->
+            <button id="language-switcher" class="language-button">English</button> 
         </div>
     `;
 
-    // Add logout event listener after header is loaded
-    const logoutButton = document.getElementById("nav-logout-button");
-    if (logoutButton) {
-        logoutButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            handleLogout();
-        });
-    }
-
-    // Check auth state to update header links immediately after loading
-    // Ensure Firebase auth is initialized before this runs
-    // checkAuthState(); // Called from auth.js DOMContentLoaded listener now
+    // Logout event listener should be added in main.js after header load
+    // Auth state check should be called from main.js after header load
 }
 
 function loadFooter() {
     const footerPlaceholder = document.getElementById("footer-placeholder");
-    if (!footerPlaceholder) return;
+    if (!footerPlaceholder) {
+        console.error("Footer placeholder not found!");
+        return;
+    }
 
     footerPlaceholder.innerHTML = `
         <div class="container">
@@ -48,31 +47,16 @@ function loadFooter() {
     `;
 }
 
-// Function to toggle language (will call function from language-switcher.js)
-// Ensure language-switcher.js is loaded before this is called
+// Function to toggle language (will be called via event listener in main.js)
 function toggleLanguage() {
-    if (typeof setLanguage === 'function') {
+    // Assumes setLanguage and currentLanguage are global from language-switcher.js
+    if (typeof setLanguage === 'function' && typeof currentLanguage !== 'undefined') {
         const newLang = currentLanguage === 'ar' ? 'en' : 'ar';
         setLanguage(newLang);
     } else {
-        console.error("setLanguage function not found. Ensure language-switcher.js is loaded.");
+        console.error("setLanguage function or currentLanguage variable not found. Ensure language-switcher.js is loaded and initialized.");
     }
 }
 
-// Load components when the script is executed
-document.addEventListener("DOMContentLoaded", () => {
-    // Ensure language switcher is initialized before translating components
-    if (typeof initializeLanguage === 'function') {
-        initializeLanguage().then(() => {
-            loadHeader();
-            loadFooter();
-            // Apply initial translation to components
-            translatePage(currentLanguage);
-        });
-    } else {
-        console.error("initializeLanguage function not found. Loading components without initial language setup.");
-        loadHeader();
-        loadFooter();
-    }
-});
-
+// Export functions to be used by main.js
+export { loadHeader, loadFooter, toggleLanguage };
